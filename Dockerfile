@@ -9,3 +9,6 @@ COPY target/boda-api-0.0.1-SNAPSHOT.jar app.jar
 
 # Comando para ejecutar la app
 ENTRYPOINT ["java", "-jar", "app.jar"]
+
+# Expone el puerto 8080 (por defecto en Spring Boot)
+EXPOSE 8080
