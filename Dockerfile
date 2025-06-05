@@ -1,14 +1,12 @@
-# Imagen base de Java 17 con Alpine (ligera)
-FROM openjdk:17-jdk-alpine
-
-# Directorio de trabajo dentro del contenedor
+# Etapa 1: Construcción
+FROM maven:3.9.6-eclipse-temurin-17 AS builder
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Copiamos el JAR generado en el contenedor
-COPY target/boda-api-0.0.1-SNAPSHOT.jar app.jar
-
-# Comando para ejecutar la app
-ENTRYPOINT ["java", "-jar", "app.jar"]
-
-# Expone el puerto 8080 (por defecto en Spring Boot)
+# Etapa 2: Imagen final liviana
+FROM openjdk:17-jdk-alpine
+WORKDIR /app
+COPY --from=builder /app/target/boda-api-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]
