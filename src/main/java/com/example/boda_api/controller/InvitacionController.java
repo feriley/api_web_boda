@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/invitaciones")
-@CrossOrigin(origins = {"http://localhost:5173", "https://web-boda-xi.vercel.app"})
+@CrossOrigin(origins = {"http://localhost:5173", "https://web-boda-xi.vercel.app", "https://boda-fatima-y-pepe.vercel.app/"})
 
 public class InvitacionController {
 
